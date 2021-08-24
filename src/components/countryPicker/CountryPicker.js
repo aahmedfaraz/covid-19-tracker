@@ -10,7 +10,10 @@ const CountryPicker = () => {
     const { countries, listLoading, getCountries, current, setCurrentCountry } = useContext(globalContext)
 
     useEffect(() => {
-        getCountries();
+        setTimeout(() => {
+            getCountries();
+            // setting timeout due to API rate limit (1 request per second > https://rapidapi.com/Gramzivi/api/covid-19-data/)
+        }, 1500);
     // eslint-disable-next-line
     }, []);
 

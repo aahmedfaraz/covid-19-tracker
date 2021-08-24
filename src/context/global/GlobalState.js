@@ -2,15 +2,17 @@ import React, {useReducer} from 'react';
 import axios from 'axios';
 import globalContext from './globalContext';
 import globalReducer from './globalReducer';
-import { GET_DATA, GET_COUNTRIES, GET_FLAG, SET_CARD_LOADING, SET_LIST_LOADING, SET_CURRENT_COUNTRY } from "../types";
+import { GET_DATA, GET_COUNTRIES, SET_CARD_LOADING, SET_LIST_LOADING, SET_CURRENT_COUNTRY, SET_CHART_LOADING, GET_GLOBAL_REPORT } from "../types";
 
 const GlobalState = props => {
     const initialState = {
         data: {},
+        globalReport: null,
         countries: null,
         current: null,
         cardLoading: true,
-        listLoading: true
+        listLoading: true,
+        chartLoading: true,
     }
 
     const [state, dispatch] = useReducer(globalReducer, initialState);
@@ -47,7 +49,7 @@ const GlobalState = props => {
 
             dispatch({type: GET_DATA, payload: modifiedData});
         } catch (error) {
-            console.log(error.response.data.message);
+            console.log(error);
             setCardLoading(false);
         }
     }
@@ -67,8 +69,27 @@ const GlobalState = props => {
                 payload: data.map(({name, alpha2code}) => ({name,alpha2code}))
             })
         } catch (error) {
-            console.log(error.response.data.message);
+            console.log(error);
             setListLoading(false);
+        }
+    }
+    
+    // Function to get global report
+    const getGlobalReport = async () => {
+        setChartLoading(true);
+        try {
+            const { data } = await axios.get('https://covid19.mathdro.id/api/daily');
+            dispatch({
+                type: GET_GLOBAL_REPORT,
+                payload: data.map(({confirmed, deaths, reportDate}) => ({
+                    confirmed: confirmed.total,
+                    deaths: deaths.total,
+                    reportDate
+                }))
+            })
+        } catch (error) {
+            console.log(error);
+            setChartLoading(false);
         }
     }
 
@@ -90,17 +111,23 @@ const GlobalState = props => {
     // Function to set list loading
     const setListLoading = (value) => dispatch({type: SET_LIST_LOADING, payload: value});
 
+    // Function to set chart loading
+    const setChartLoading = (value) => dispatch({type: SET_CHART_LOADING, payload: value});
+
     return (
         <globalContext.Provider
             value={{
                 data: state.data,
                 current: state.current,
+                globalReport: state.globalReport,
                 countries: state.countries,
                 cardLoading: state.cardLoading,
                 listLoading: state.listLoading,
+                chartLoading: state.chartLoading,
                 getData: getData,
                 getCountries: getCountries,
-                setCurrentCountry: setCurrentCountry
+                setCurrentCountry: setCurrentCountry,
+                getGlobalReport: getGlobalReport
             }}
         >
             {props.children}

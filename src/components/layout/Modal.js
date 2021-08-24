@@ -10,13 +10,14 @@ const Modal = ({displayModal, toggleModalDisplay}) => {
             </DialogTitle>
             <DialogContent dividers>
                 <Typography variant="body2" color="secondary"><strong>Developed by Ahmed Faraz</strong></Typography>
-                <Typography variant="body1">Track COVID-19 situation globally or country wise</Typography>
+                <Typography variant="body1">Track COVID-19 situation Globally or of any Country</Typography>
                 <Typography variant="h4" color="primary">TECH USED</Typography>
                 <ul style={{padding: '0 10px'}}>
-                    <li><small>Custom CSS Modules</small></li>
+                    <li><small>React</small></li>
                     <li><small>Material UI</small></li>
-                    <li><small>REST APIs (Covid APIs global based + individual country based)</small></li>
-                    <li><small>NPM Packages: axios | material-ui | chart.js | react-chartjs-2 | react-countup | classnames</small></li>
+                    <li><small>Custom CSS Modules</small></li>
+                    <li><small>COVID-19 APIs (RapidAPI + covid19.mathdro.id/api)</small></li>
+                    <li><small>ChartJS</small></li>
                     <li><small>Context APIs</small></li>
                     <li><small>GitHub</small></li>
                     <li><small>GitHub Actions</small></li>

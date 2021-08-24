@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, Fragment } from 'react';
-import cx from 'classnames';
 import styles from './Cards.module.css';
 import { Card, CardContent, Typography, Grid, CircularProgress } from '@material-ui/core';
 import CountUp from 'react-countup';
@@ -12,9 +11,9 @@ const Cards = () => {
     const { data:{confirmed, recovered, deaths, lastUpdate}, cardLoading, getData, current } = useContext(globalContext);
 
     useEffect(() => {
-        getData("pakistan");
+        getData(current ? current.alpha2code : "");
     // eslint-disable-next-line
-    }, []);
+    }, [current]);
 
     return (
         <div className={styles.container}>
@@ -23,7 +22,7 @@ const Cards = () => {
                 justifyContent="center"
                 spacing={2}
             >
-                <Grid item xs={12} md={3} component={Card} className={cx(styles.card, styles.confirmed)}>
+                <Grid item xs={12} md={3} component={Card} className={`${styles.card} ${styles.confirmed}`}>
                     <CardContent>
                         {
                             !cardLoading ? (
@@ -41,7 +40,7 @@ const Cards = () => {
                         }
                     </CardContent>
                 </Grid>
-                <Grid item xs={12} md={3} component={Card} className={cx(styles.card, styles.recovered)}>
+                <Grid item xs={12} md={3} component={Card} className={`${styles.card} ${styles.recovered}`}>
                     <CardContent>
                         {
                             !cardLoading ? (
@@ -59,7 +58,7 @@ const Cards = () => {
                         }
                     </CardContent>
                 </Grid>
-                <Grid item xs={12} md={3} component={Card} className={cx(styles.card, styles.deaths)}>
+                <Grid item xs={12} md={3} component={Card} className={`${styles.card} ${styles.deaths}`}>
                     <CardContent>
                         {
                             !cardLoading ? (

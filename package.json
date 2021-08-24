@@ -10,7 +10,6 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "chart.js": "^3.5.1",
-    "classnames": "^2.3.1",
     "install": "^0.13.0",
     "moment": "^2.29.1",
     "npm": "^7.21.0",

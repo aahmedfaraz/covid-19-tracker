@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pieSettings {
+  width: 400px !important;
+  margin: auto;
+}
+
+@media (max-width: 500px) {
+  .pieSettings {
+    width: 100% !important;
+  }
+}
+
+.progress {
+  margin: 50px auto;
+}
