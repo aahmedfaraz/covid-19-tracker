@@ -1,0 +1,11 @@
+.container {
+  padding: 10px;
+}
+
+.flag {
+  max-height: 80px !important;
+  margin: 10px;
+  background-color: rgb(236, 236, 236);
+  padding: 10px;
+  border-radius: 10px;
+}
